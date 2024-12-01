@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Suspense } from 'react'
+import routes from './router'
+import { Link, useRoutes } from 'react-router-dom'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="nav">
+        <Link to="/discover">發現音樂</Link>
+        <Link to="/mine">我的音樂</Link>
+        <Link to="/focus">關注</Link>
+        <Link to="/download">下載客戶端</Link>
+      </div>
+      <Suspense fallback="loading...">
+        <main>{useRoutes(routes)}</main>
+      </Suspense>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
