@@ -4,13 +4,28 @@ const resolve = (dir) => path.resolve(__dirname, dir)
 
 module.exports = {
   webpack: {
+    configure: (config, { env, paths }) => {
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: ['@svgr/webpack']
+      })
+      return config
+    },
     alias: {
-      '@': resolve('src')
+      '@': resolve('src'),
+      assets: resolve('src/assets')
     }
   },
   plugins: [
     {
-      plugin: CracoLessPlugin
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          lessOptions: {
+            javascriptEnabled: true
+          }
+        }
+      }
     }
   ]
 }
